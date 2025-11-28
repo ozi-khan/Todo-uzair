@@ -7,6 +7,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///todo.db"
 db=SQLAlchemy(app)
 app.app_context().push()
+from myapp import app 
 
 class Todo(db.Model):
     sno=db.Column(db.Integer, primary_key=True)
@@ -61,3 +62,6 @@ def delete(sno):
     
 if __name__=="__main__":
     app.run(debug=True , port=2000)
+    
+def handler(event, context):
+    return app(event, context)
