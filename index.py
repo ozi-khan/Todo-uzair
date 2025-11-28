@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request,redirect
 from  flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from serverless_wsgi import handle
 app = Flask(__name__)
 #we use Sqlalchemy to change Database through python. it is an orm maper.
 #DATABASE:
@@ -62,6 +63,6 @@ def delete(sno):
     
 if __name__=="__main__":
     app.run(debug=True , port=2000)
-    
+
 def handler(event, context):
-    return app(event, context)
+    return handle(app,event, context)
